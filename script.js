@@ -1,3 +1,6 @@
+let flags = [];
+let currentFlag;
+
 document.addEventListener('DOMContentLoaded', () => {
     loadFlags();
     document.getElementById('guess-button').addEventListener('click', checkGuess);
@@ -6,30 +9,31 @@ document.addEventListener('DOMContentLoaded', () => {
             checkGuess();
         }
     });
+    setFocusOnInput();
 });
-
-let flags = [];
-let currentFlag;
 
 function loadFlags() {
     fetch('countries.json')
         .then(response => response.json())
         .then(data => {
             flags = data.map(country => ({
-                emoji: getFlagEmoji(country.cca2),
+                emoji: countryCodeToFlag(country.cca2),
                 answers: [
                     country.name.common.toLowerCase(),
                     country.name.official.toLowerCase(),
-                    country.cca2.toLowerCase()  // Include the cca2 code as a valid answer
+                    country.cca2.toLowerCase()
                 ]
             }));
             displayNewFlag();
         })
-        .catch(error => console.error('Failed to load flags:', error));
+        .catch(error => {
+            console.error('Failed to load flags:', error);
+        });
 }
 
-function getFlagEmoji(cca2) {
-    return String.fromCodePoint(...cca2.split('').map(c => 127397 + c.charCodeAt(0)));
+
+function countryCodeToFlag(countryCode) {
+    return String.fromCodePoint(...countryCode.toUpperCase().split('').map(c => 127397 + c.charCodeAt(0)));
 }
 
 function displayNewFlag() {
@@ -39,10 +43,6 @@ function displayNewFlag() {
     }
 }
 
-function normalizeString(input) {
-    return input.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-}
-
 function checkGuess() {
     const userInput = document.getElementById('guess-input');
     const userGuess = normalizeString(userInput.value); // Normalize user input to remove accents
@@ -50,11 +50,34 @@ function checkGuess() {
 
     if (currentFlag && currentFlag.answers.includes(userGuess)) {
         resultDiv.textContent = 'Correct!';
-        resultDiv.className = 'correct'; // Apply correct class for styling
-        displayNewFlag(); // Change to a new flag only if the guess is correct
+        resultDiv.className = 'correct';
+        setTimeout(() => {
+            resultDiv.textContent = ''; // Clear the message after 2 seconds
+        }, 1000);
+        displayNewFlag(); // Only change the flag on a correct guess
     } else {
         resultDiv.textContent = 'Incorrect, try again!';
-        resultDiv.className = 'incorrect'; // Apply incorrect class for styling
+        resultDiv.className = 'incorrect';
+        setTimeout(() => {
+            resultDiv.textContent = ''; // Clear the message after 2 seconds
+        }, 1000);
     }
     userInput.value = ''; // Reset the input field after a guess
+    setFocusOnInput(); // Refocus on the input field after each guess
+}
+
+function setFocusOnInput() {
+    document.getElementById('guess-input').focus();
+}
+
+function normalizeString(input) {
+    return input.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace("-", " ").toLowerCase();
+}
+
+function searchEmoji() {
+    const emoji = document.getElementById('flag-display').textContent; // Get the emoji from the div
+    const query = encodeURIComponent(emoji); // Encode the emoji for URL use
+    const url = `https://duckduckgo.com/?q=${query}&t=hy&ia=web`;
+    window.open(url, '_blank'); // Open the search in a new tab
+    setFocusOnInput(); // Refocus on the input field
 }

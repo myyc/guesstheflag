@@ -1524,7 +1524,7 @@
     },
     {
         "name": {
-            "common": "Bosnia and Herzegovina",
+            "common": "Bosnia",
             "official": "Bosnia and Herzegovina",
             "nativeName": {
                 "bos": {
@@ -1631,8 +1631,8 @@
     },
     {
         "name": {
-            "common": "Pitcairn Islands",
-            "official": "Pitcairn Group of Islands",
+            "common": "Pitcairn",
+            "official": "Pitcairn Islands",
             "nativeName": {
                 "eng": {
                     "official": "Pitcairn Group of Islands",
@@ -2728,7 +2728,7 @@
     },
     {
         "name": {
-            "common": "Turks and Caicos Islands",
+            "common": "Turks and Caicos",
             "official": "Turks and Caicos Islands",
             "nativeName": {
                 "eng": {

@@ -33,3 +33,19 @@ button {
     color: red;
     /* Color for incorrect answers */
 }
+
+.flag-container {
+    display: inline-block;
+    font-size: 128px;
+    /* Increase the font size to make the emoji larger */
+    cursor: pointer;
+    /* Shows a pointer cursor on hover to indicate clickability */
+    margin: 20px;
+    transition: transform 0.2s;
+    /* Smooth transform effect for interaction */
+}
+
+.flag-container:hover {
+    transform: scale(1.1);
+    /* Slightly scale up the emoji on hover */
+}
