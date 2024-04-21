@@ -24,12 +24,12 @@ function loadFlags() {
                 ]
             }));
             displayNewFlag();
+            setFocusOnInput();
         })
         .catch(error => {
             console.error('Failed to load flags:', error);
         });
 }
-
 
 function countryCodeToFlag(countryCode) {
     return String.fromCodePoint(...countryCode.toUpperCase().split('').map(c => 127397 + c.charCodeAt(0)));
