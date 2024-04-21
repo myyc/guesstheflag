@@ -10,8 +10,7 @@ body {
     margin: 20px;
 }
 
-input,
-button {
+input {
     font-size: 16px;
     padding: 10px;
     margin-top: 5px;

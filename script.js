@@ -3,7 +3,6 @@ let currentFlag;
 
 document.addEventListener('DOMContentLoaded', () => {
     loadFlags();
-    document.getElementById('guess-button').addEventListener('click', checkGuess);
     document.getElementById('guess-input').addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
             checkGuess();
