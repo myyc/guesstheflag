@@ -34,7 +34,9 @@ input[type="text"] {
 
 .autocomplete-items {
     /* Previous styles here */
-    display: none; /* Initially hidden, shown by JavaScript */
+    display: none;
+    /* Initially hidden, shown by JavaScript */
+    z-index: 1000;
 }
 
 #autocomplete-list {
