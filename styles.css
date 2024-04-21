@@ -1,7 +1,9 @@
 body {
     font-family: "Noto Sans", sans-serif;
     text-align: center;
-    margin: 20px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #FFF;
     /* Light background */
     color: #000;
@@ -116,5 +118,56 @@ input[type="text"] {
     .incorrect {
         background-color: #D32F2F;
         /* Darker red for better visibility in dark mode */
+    }
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    /* Light grey background */
+    color: #333;
+    /* Dark grey text for readability */
+    text-align: center;
+    padding: 5px 0;
+    border-top: 1px solid #ddd;
+    /* Subtle border line at the top of the footer */
+}
+
+footer a {
+    color: #0066cc;
+    /* A nice blue color for the link */
+    text-decoration: none;
+    /* No underline */
+}
+
+footer a:hover,
+footer a:focus {
+    text-decoration: underline;
+    /* Underline on hover/focus for better accessibility */
+    color: #0056b3;
+    /* Slightly darker blue when hovering */
+}
+
+@media (prefers-color-scheme: dark) {
+    footer {
+        background-color: #222;
+        /* Darker background for the footer in dark mode */
+        color: #ccc;
+        /* Lighter text in dark mode */
+        border-top: 1px solid #444;
+        /* Darker border in dark mode */
+    }
+
+    footer a {
+        color: #0096ff;
+        /* Brighter blue for links in dark mode */
+    }
+
+    footer a:hover,
+    footer a:focus {
+        color: #0081db;
+        /* Slightly darker blue on hover in dark mode */
     }
 }
