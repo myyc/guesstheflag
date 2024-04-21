@@ -32,6 +32,11 @@ input[type="text"] {
     border: 2px solid #ddd;
 }
 
+.autocomplete-items {
+    /* Previous styles here */
+    display: none; /* Initially hidden, shown by JavaScript */
+}
+
 #autocomplete-list {
     position: absolute;
     top: 100%;

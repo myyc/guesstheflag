@@ -36,37 +36,38 @@ function loadFlags() {
 }
 
 document.getElementById('search-input').addEventListener('input', function () {
-    let input = this.value.toLowerCase();
-    let suggestions = document.getElementById('autocomplete-list');
-    suggestions.innerHTML = ''; // Clear existing suggestions
+    const input = this.value.toLowerCase();
+    const suggestions = document.getElementById('autocomplete-list');
+
+    // Clear the autocomplete list and ensure it's visible
+    suggestions.innerHTML = '';
+    suggestions.style.display = 'block';
 
     if (!input) {
-        suggestions.classList.add('hidden'); // Hide suggestions if input is empty
+        // Hide the autocomplete list if the input is empty
+        suggestions.style.display = 'none';
         return;
     }
 
-    let hasSuggestions = false;
     flags.forEach(flag => {
-        if (flag.commonName.startsWith(input)) {
-            hasSuggestions = true;
-            let item = document.createElement('div');
+        if (flag.commonName.toLowerCase().includes(input)) {
+            const item = document.createElement('div');
             item.textContent = flag.commonName;
-            item.onclick = function () {
-                document.getElementById('search-input').value = this.textContent;
+            item.addEventListener('click', function () {
+                document.getElementById('search-input').value = flag.commonName;
+                checkGuess(flag.commonName);
                 suggestions.innerHTML = '';
-                checkGuess(this.textContent);
-                suggestions.classList.add('hidden'); // Hide after selection
-            };
+                suggestions.style.display = 'none'; // Hide after selection
+            });
             suggestions.appendChild(item);
         }
     });
 
-    if (hasSuggestions) {
-        suggestions.classList.remove('hidden'); // Show suggestions if there are any
-    } else {
-        suggestions.classList.add('hidden'); // Hide suggestions if there are none
+    if (suggestions.innerHTML === '') {
+        suggestions.style.display = 'none'; // Hide if there are no suggestions
     }
 });
+
 
 function checkGuess(guessedName) {
     const normalizedGuess = guessedName.trim().toLowerCase();
