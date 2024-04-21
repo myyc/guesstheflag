@@ -1,0 +1,35 @@
+body {
+    font-family: "Noto Sans", sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+.flag {
+    font-size: 128px;
+    /* Display flags in large font size for visibility */
+    margin: 20px;
+}
+
+input,
+button {
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+#result {
+    margin-top: 10px;
+    /* Adds some space between the input and result text */
+    font-size: 20px;
+    /* Makes the result text larger and more noticeable */
+}
+
+.correct {
+    color: green;
+    /* Color for correct answers */
+}
+
+.incorrect {
+    color: red;
+    /* Color for incorrect answers */
+}
