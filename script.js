@@ -17,7 +17,11 @@ function loadFlags() {
         .then(data => {
             flags = data.map(country => ({
                 emoji: getFlagEmoji(country.cca2),
-                answers: [country.name.common.toLowerCase(), country.name.official.toLowerCase()]
+                answers: [
+                    country.name.common.toLowerCase(),
+                    country.name.official.toLowerCase(),
+                    country.cca2.toLowerCase()  // Include the cca2 code as a valid answer
+                ]
             }));
             displayNewFlag();
         })
@@ -44,7 +48,7 @@ function checkGuess() {
     const userGuess = normalizeString(userInput.value); // Normalize user input to remove accents
     const resultDiv = document.getElementById('result');
 
-    if (currentFlag && (currentFlag.answers.includes(userGuess) || currentFlag.answers.some(answer => normalizeString(answer) === userGuess))) {
+    if (currentFlag && currentFlag.answers.includes(userGuess)) {
         resultDiv.textContent = 'Correct!';
         resultDiv.className = 'correct'; // Apply correct class for styling
         displayNewFlag(); // Change to a new flag only if the guess is correct
