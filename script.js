@@ -3,17 +3,12 @@ let currentFlag;
 
 document.addEventListener('DOMContentLoaded', () => {
     loadFlags();
-
-    document.getElementById('guess-input').addEventListener('keyup', function (event) {
+    document.getElementById('guess-button').addEventListener('click', checkGuess);
+    document.getElementById('guess-input').addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
             checkGuess();
         }
     });
-
-    document.getElementById('guess-input').addEventListener('touchstart', function () {
-        this.focus();
-    });
-
     setFocusOnInput();
 });
 
@@ -73,7 +68,6 @@ function checkGuess() {
 
 function setFocusOnInput() {
     document.getElementById('guess-input').focus();
-    document.body.scrollTop = inputElement.offsetTop;
 }
 
 function normalizeString(input) {
