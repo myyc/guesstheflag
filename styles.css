@@ -1,51 +1,113 @@
 body {
-    font-family: "Noto Sans", sans-serif;
+    font-family: Arial, sans-serif;
     text-align: center;
-    padding: 20px;
-}
-
-.flag {
-    font-size: 128px;
-    /* Display flags in large font size for visibility */
     margin: 20px;
-}
-
-input,
-button {
-    font-size: 16px;
-    padding: 10px;
-    margin-top: 5px;
-}
-
-#result {
-    margin-top: 10px;
-    /* Adds some space between the input and result text */
-    font-size: 20px;
-    /* Makes the result text larger and more noticeable */
-}
-
-.correct {
-    color: green;
-    /* Color for correct answers */
-}
-
-.incorrect {
-    color: red;
-    /* Color for incorrect answers */
+    background-color: #FFF;
+    /* Light background */
+    color: #000;
+    /* Dark text for light mode */
 }
 
 .flag-container {
-    display: inline-block;
     font-size: 128px;
-    /* Increase the font size to make the emoji larger */
+    margin: 20px auto;
     cursor: pointer;
-    /* Shows a pointer cursor on hover to indicate clickability */
-    margin: 20px;
-    transition: transform 0.2s;
-    /* Smooth transform effect for interaction */
+    /* Indicates the flag is clickable */
 }
 
-.flag-container:hover {
-    transform: scale(1.1);
-    /* Slightly scale up the emoji on hover */
+#search-container {
+    position: relative;
+    width: 300px;
+    /* Fixed width for better control */
+    margin: 20px auto;
+    /* Center align the container */
+}
+
+input[type="text"] {
+    width: 100%;
+    /* Full width of the container */
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+}
+
+#autocomplete-list {
+    position: absolute;
+    top: 100%;
+    /* Start just below the input field */
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #d4d4d4;
+    z-index: 1000;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items div:hover {
+    background-color: #e9e9e9;
+    /* Light grey background on hover */
+}
+
+.hidden {
+    display: none;
+}
+
+#result {
+    font-size: 20px;
+    margin-top: 20px;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+}
+
+.correct {
+    background-color: #4CAF50;
+    /* Green for correct */
+}
+
+.incorrect {
+    background-color: #f44336;
+    /* Red for incorrect */
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #333;
+        /* Darker background for dark mode */
+        color: #CCC;
+        /* Lighter text color for dark mode */
+    }
+
+    input[type="text"],
+    #autocomplete-list,
+    .autocomplete-items div {
+        background-color: #555;
+        /* Darker background for inputs and items */
+        color: #FFF;
+        /* White text for inputs and items */
+        border-color: #777;
+        /* Lighter border for better visibility */
+    }
+
+    .autocomplete-items div:hover {
+        background-color: #444;
+        /* Slightly lighter background on hover */
+    }
+
+    .correct {
+        background-color: #388E3C;
+        /* Darker green for better visibility in dark mode */
+    }
+
+    .incorrect {
+        background-color: #D32F2F;
+        /* Darker red for better visibility in dark mode */
+    }
 }

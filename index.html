@@ -9,10 +9,11 @@
 
 <body>
     <h1>Guess the Flag!</h1>
-    <div id="flag-display" class="flag-container" onclick="searchEmoji()"></div>
-    <div id="copy-notification" class="copy-notification"></div>
-    <input type="text" id="guess-input" placeholder="Enter country name">
-    <button id="guess-button">Guess</button>
+    <div id="flag-display" class="flag-container">🌍</div>
+    <div id="search-container"> <!-- New container for positioning -->
+        <input type="text" id="search-input" placeholder="Guess the flag" autocomplete="off">
+        <div id="autocomplete-list" class="autocomplete-items hidden"></div>
+    </div>
     <div id="result"></div>
     <script src="script.js"></script>
 </body>
