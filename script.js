@@ -7,16 +7,50 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.getElementById('search-input').addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
-        event.preventDefault();
-        let suggestions = document.getElementById('autocomplete-list').children;
-        if (suggestions.length > 0) {
+    let suggestions = document.getElementById('autocomplete-list').children;
+    let active = document.querySelector('.autocomplete-active');
+
+    if (event.key === 'ArrowDown') {
+        event.preventDefault(); // Prevent the cursor from moving
+        if (!active || active.nextSibling == null) {
+            // If no item is active or the active item is the last one, focus the first item
+            suggestions[0].classList.add('autocomplete-active');
+        } else {
+            // Move the active class to the next item
+            active.classList.remove('autocomplete-active');
+            active.nextSibling.classList.add('autocomplete-active');
+        }
+    } else if (event.key === 'ArrowUp') {
+        event.preventDefault(); // Prevent the cursor from moving and scrolling the page
+        if (!active || active.previousSibling == null) {
+            // If no item is active or the active item is the first one, focus the last item
+            suggestions[suggestions.length - 1].classList.add('autocomplete-active');
+        } else {
+            // Move the active class to the previous item
+            active.classList.remove('autocomplete-active');
+            active.previousSibling.classList.add('autocomplete-active');
+        }
+    } else if (event.key === 'Enter') {
+        event.preventDefault(); // Prevent form submission
+        if (active) {
+            // Simulate a click on the active item
+            active.click();
+        } else if (suggestions.length > 0) {
+            // If no item is active but suggestions exist, click the first one
             suggestions[0].click();
         } else {
+            // Perform the standard guess check if no suggestions are active
             checkGuess(this.value);
         }
     }
 });
+
+// Utility function to clear any previously active suggestions
+function clearActive(suggestions) {
+    for (let i = 0; i < suggestions.length; i++) {
+        suggestions[i].classList.remove('autocomplete-active');
+    }
+}
 
 function normalizeString(input) {
     return input.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
